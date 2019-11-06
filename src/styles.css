@@ -1,1 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~katex/dist/katex.css';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html {
+    width: 100%;
+    height: 100%;
+    background: url(./assets/img/fondo.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    background: url(./assets/img/fondo.jpg) no-repeat center top;
+    background-size: 100% 100%;
+    font-family: Helvetica !important;
+}
+
+.color-navbar {
+    background: rgba(43, 43, 40, 0.9) !important;
+    color: white;
+}
+
+.contenedor-imagen-resolver {
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.imagen-resolver {
+    width: 100%;
+    height: 100%;
+}
+
+.border-radius {
+    border-radius: 30px;
+}
+
+.boton-iniciar {
+    width: 30%;
+    height: 100%;
+    background: rgba(227, 176, 75, 0.9);
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+}
+
+.btn-material {
+    padding: 0 16px;
+    border-radius: 10px;
+    background-color: rgba(227, 176, 75, 0.9);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    color: #000000;
+    transition: background-color 15ms linear, box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 20%;
+    height: 36px;
+    line-height: 2.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.btn-material:hover,
+.btn-material:focus {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+    background-color: rgba(250, 194, 83, 0.9);
+}
+
+.btn-material:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    background-color: rgba(247, 210, 137, 0.9);
+}
+
+.position-absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.img-logo {
+    width: 40%;
+    height: 50%;
+}
+
+.border-black {
+    border: 1px solid rgb(110, 110, 110);
+}
+
+.div-completo-fondo-blanco {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
