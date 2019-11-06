@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, SimpleChanges   } from '@angular/core';
 import { Datos } from '../../clases/datos';
+
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+
 
 import {
   trigger,
@@ -64,39 +67,47 @@ import {
 export class SimulacionComponent implements OnInit {
 
   private formulario:Datos = new Datos;
+  private forma:FormGroup;
 
-  constructor() {
+  constructor(private changeDetector: ChangeDetectorRef) {
     this.formulario.tipo_optimizacion = "max";
-    this.formulario.vd = 1;
+    this.formulario.vd = null;
    }
 
   ngOnInit() {
-     
+     this.forma = new FormGroup({
+      'numero_variables_decision' : new FormControl(),
+      'tipo_optimizacion': new FormControl('max'),
+      'funcion_objetivo': new FormArray([]),
+      'numero_restricciones': new FormControl(),
+      'restricciones': new FormArray([])
+    })
   }
+
 
   llenarFuncionObjetivo(value){
-    this.formulario.fo = [];
-    for(var i=0; i<value;i++){
-      this.formulario.fo.push({ 'numero': 0 });
+    this.forma.controls.funcion_objetivo = new FormArray([])
+    for(var i=0; i<value; i++){
+      (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl(0));
     }
-    this.formulario.nRestricciones = null;
   }
 
+
   llenarRestricciones(value){
-    this.formulario.restricciones = [];
+    this.forma.controls.restricciones = new FormArray([]);
     for(var i=0; i<value;i++){
-      let lista_auxiliar = [];
-      lista_auxiliar.push({'signo': "<="});
-      lista_auxiliar.push({ 'igualacion': 0 });
-      for(var j=0; j<this.formulario.vd;j++){
-        lista_auxiliar.push({ 'numero': 0 })
+      let lista_auxiliar = new FormArray([]);
+      (<FormArray>lista_auxiliar).push(new FormControl("<="));
+      (<FormArray>lista_auxiliar).push(new FormControl(0));
+      for(var j=0; j<this.forma.controls.numero_variables_decision.value;j++){
+        (<FormArray>lista_auxiliar).push(new FormControl(0));
       }
-      this.formulario.restricciones.push(lista_auxiliar);
+      (<FormArray>this.forma.controls.restricciones).push(new FormGroup({ 'restriccion': lista_auxiliar} ));
     }
   }
 
   evaluarDatos(){
-    console.log(this.formulario)
+    console.log(this.forma)
   }
 
 

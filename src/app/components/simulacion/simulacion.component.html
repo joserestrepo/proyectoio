@@ -3,20 +3,20 @@
     <div @enterState class="container bg-white text-center border-radius border">
         <h1> Realiza tus calculos </h1>
         <hr>
-        <form (ngSubmit)="evaluarDatos()">
+        <form [formGroup]="forma" (ngSubmit)="evaluarDatos()" novalidate="novalidate">
             <div class="form-group row">
                 <div class="col">
-                    <mat-form-field class="example-full-width">
-                        <input matInput (ngModelChange)="llenarFuncionObjetivo($event)" [(ngModel)]="formulario.vd" name="vd" placeholder="N° de variables de decision" value="" type="number">
+                    <mat-form-field>
+                        <input matInput (ngModelChange)="llenarFuncionObjetivo($event)" formControlName="numero_variables_decision" name="vd" placeholder="N° de variables de decision" value="" type="number">
                     </mat-form-field>
                 </div>
             </div>
-            <div @enterDifuminado *ngIf="formulario.vd > 0">
+            <div @enterDifuminado *ngIf="forma.controls.numero_variables_decision.value > 0">
                 <div class="form-group row">
                     <div class="col">
                         <label for="optimizacion" class="mr-2 mb-2">Seleccione el tipo de optimizacion: </label>
 
-                        <mat-radio-group [(ngModel)]="formulario.tipo_optimizacion" name="optimizacion">
+                        <mat-radio-group formControlName="tipo_optimizacion">
                             <mat-radio-button value="max" class="mr-2">Max</mat-radio-button>
                             <mat-radio-button value="min">Min</mat-radio-button>
                         </mat-radio-group>
@@ -27,43 +27,44 @@
                         <table>
                             <tr>
                                 <td>
-                                    <div [@maxMin]="formulario.tipo_optimizacion">
-                                        <ng-katex-paragraph paragraph="$ {{formulario.tipo_optimizacion | primercaractermayuscula}}Z: $"></ng-katex-paragraph>
+                                    <div [@maxMin]="forma.controls.tipo_optimizacion.value">
+                                        <ng-katex-paragraph paragraph="$ {{forma.controls.tipo_optimizacion.value | primercaractermayuscula}}Z: $"></ng-katex-paragraph>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="d-inline-block align-self-end" *ngFor="let item of formulario.fo; let i = index">
+                    <div formArrayName="funcion_objetivo" class="d-inline-block align-self-end" *ngFor="let item of forma.controls.funcion_objetivo.controls; let i = index">
                         <table>
                             <tr>
                                 <td>
                                     <mat-form-field [style.width.px]=50>
-                                        <input matInput [(ngModel)]="formulario.fo[i].numero" name="fo.{{i}}" placeholder="" value="" type="number">
+                                        <input matInput [formControlName]="i" placeholder="" value="" type="number">
                                     </mat-form-field>
                                 </td>
                                 <td>
                                     <ng-katex-paragraph paragraph="$x_{{i+1}}$"></ng-katex-paragraph>
                                 </td>
-                                <td *ngIf="(i+1) < formulario.vd">
+                                <td *ngIf="(i+1) < forma.controls.numero_variables_decision.value">
                                     <ng-katex-paragraph paragraph="$+$"></ng-katex-paragraph>
                                 </td>
                             </tr>
                         </table>
                     </div>
+
                 </div>
             </div>
             <hr>
             <div class="form-group row">
                 <div class="col">
-                    <mat-form-field class="example-full-width">
-                        <input matInput (ngModelChange)="llenarRestricciones($event)" [(ngModel)]="formulario.nRestricciones" name="nr" placeholder="N° de restricciónes" value="" type="number">
+                    <mat-form-field>
+                        <input matInput (ngModelChange)="llenarRestricciones($event)" formControlName="numero_restricciones" name="nr" placeholder="N° de restricciónes" value="" type="number">
                     </mat-form-field>
                 </div>
             </div>
-            <div @enterDifuminado *ngIf="formulario.vd > 0 && formulario.nRestricciones > 0">
-                <div class="form-group text-center" *ngFor="let restriccion of formulario.restricciones; let i= index ">
-                    <div class="align-self-center">
+            <div @enterDifuminado *ngIf="forma.controls.numero_variables_decision.value > 0 && forma.controls.numero_restricciones.value > 0">
+                <div class="form-group text-center" *ngFor="let restriccion of forma.controls.restricciones.controls; let i= index ">
+                    <div formArrayName="restricciones" class="align-self-center">
                         <table class="d-inline-block">
                             <tr>
                                 <div class="mr-2 mt-3">
@@ -71,18 +72,18 @@
                                 </div>
                             </tr>
                         </table>
-                        <div class="d-inline-block align-self-end" *ngFor="let item of formulario.fo; let j = index">
+                        <div [formGroupName]="i" class="d-inline-block align-self-end" *ngFor="let item of forma.controls.funcion_objetivo.controls; let j = index">
                             <table>
                                 <tr>
-                                    <td>
+                                    <td formArrayName="restriccion">
                                         <mat-form-field [style.width.px]=50 class="example-full-width">
-                                            <input matInput placeholder="" value="" type="number">
+                                            <input matInput [formControlName]="j+2" placeholder="" value="" type="number">
                                         </mat-form-field>
                                     </td>
                                     <td>
                                         <ng-katex-paragraph paragraph="$x_{{j+1}}$"></ng-katex-paragraph>
                                     </td>
-                                    <td *ngIf="(j+1) < formulario.vd">
+                                    <td *ngIf="(j+1) < forma.controls.numero_variables_decision.value">
                                         <ng-katex-paragraph paragraph="$+$"></ng-katex-paragraph>
                                     </td>
                                 </tr>
