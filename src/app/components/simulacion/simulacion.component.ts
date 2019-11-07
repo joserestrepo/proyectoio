@@ -68,6 +68,8 @@ export class SimulacionComponent implements OnInit {
 
   private formulario:Datos = new Datos;
   private forma:FormGroup;
+  private control_fo:number;
+  private control_restricciones:number;
 
   constructor(private changeDetector: ChangeDetectorRef) {
     this.formulario.tipo_optimizacion = "max";
@@ -76,25 +78,55 @@ export class SimulacionComponent implements OnInit {
 
   ngOnInit() {
      this.forma = new FormGroup({
-      'numero_variables_decision' : new FormControl(),
+      'numero_variables_decision' : new FormControl(''),
       'tipo_optimizacion': new FormControl('max'),
       'funcion_objetivo': new FormArray([]),
-      'numero_restricciones': new FormControl(),
-      'restricciones': new FormArray([])
+      'numero_restricciones': new FormControl(''),
+      'restricciones': new FormArray([
+        new FormControl('')
+      ])
     })
+
+    this.forma.controls.numero_variables_decision.valueChanges.subscribe( data =>{
+      console.log("cambio");
+      if( data != null  &&  this.control_fo != data){
+        this.llenarFuncionObjetivo(data);
+        this.control_fo = data;
+      }
+    });
+
+    this.forma.controls.numero_restricciones.valueChanges.subscribe( data =>{
+      console.log("cambio");
+      if( data != null  &&  this.control_restricciones != data){
+        this.llenarRestricciones(data);
+        this.control_restricciones = data;
+      }
+    });
+
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    
+    this.changeDetector.detectChanges();
   }
 
 
+
   llenarFuncionObjetivo(value){
-    this.forma.controls.funcion_objetivo = new FormArray([])
-    for(var i=0; i<value; i++){
-      (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl(0));
-    }
+      (<FormArray>this.forma.controls.funcion_objetivo).clear();
+      this.forma.controls.numero_restricciones.reset();
+      this.control_restricciones = null;
+      for(var i=0; i<value; i++){
+        (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl(''));
+      }
+    
   }
 
 
   llenarRestricciones(value){
-    this.forma.controls.restricciones = new FormArray([]);
+    (<FormArray>this.forma.controls.restricciones).clear();
     for(var i=0; i<value;i++){
       let lista_auxiliar = new FormArray([]);
       (<FormArray>lista_auxiliar).push(new FormControl("<="));
@@ -102,7 +134,7 @@ export class SimulacionComponent implements OnInit {
       for(var j=0; j<this.forma.controls.numero_variables_decision.value;j++){
         (<FormArray>lista_auxiliar).push(new FormControl(0));
       }
-      (<FormArray>this.forma.controls.restricciones).push(new FormGroup({ 'restriccion': lista_auxiliar} ));
+      (<FormArray>this.forma.controls.restricciones).push(new FormGroup({ 'restriccion': lista_auxiliar }));
     }
   }
 
