@@ -3,6 +3,9 @@ import { Datos } from '../../clases/datos';
 
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
+import { SimplexService } from '../../services/simplex.service';
+
+
 
 import {
   trigger,
@@ -71,7 +74,7 @@ export class SimulacionComponent implements OnInit {
   private control_fo:number;
   private control_restricciones:number;
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(private changeDetector: ChangeDetectorRef, private simplex_service:SimplexService) {
     this.formulario.tipo_optimizacion = "max";
     this.formulario.vd = null;
    }
@@ -140,6 +143,9 @@ export class SimulacionComponent implements OnInit {
 
   evaluarDatos(){
     console.log(this.forma)
+    this.simplex_service.solucionarProblema().subscribe(data =>{
+      console.log(data)
+    })
   }
 
 

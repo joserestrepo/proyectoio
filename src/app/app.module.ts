@@ -9,6 +9,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 import { APP_ROUTING } from './app.route';
 import { AppComponent } from './app.component';
@@ -38,7 +41,8 @@ import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pip
     ReactiveFormsModule,
     MatRadioModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
