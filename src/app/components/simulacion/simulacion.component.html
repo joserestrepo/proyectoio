@@ -89,27 +89,25 @@
                                 </tr>
                             </table>
                         </div>
-                        <table class="d-inline-block ml-2">
+                        <table [formGroupName]="i" class="d-inline-block ml-2">
                             <tr>
                                 <td>
-                                    <div class="mr-2">
-                                        <mat-form-field [style.width.px]=100>
-                                            <mat-label>Select an option</mat-label>
-                                            <mat-select [(value)]="selected">
+                                    <div class="mr-2" formArrayName="restriccion">
+                                        <mat-form-field [style.width.px]=50>
+                                            <mat-label>Signo</mat-label>
+                                            <mat-select [(value)]="selected" [formControlName]="0">
                                                 <mat-option>None</mat-option>
-                                                <mat-option value="option1">
-                                                    <p> {{ "
-                                                        <=" }} </p></mat-option>
-                                                <mat-option value=" option2 ">Menor igual</mat-option>
-                                                <mat-option value="option3 ">Mayor igual</mat-option>
+                                                <mat-option value="=">=</mat-option>
+                                                <mat-option value=">=">≥</mat-option>
+                                                <mat-option value="<=">≤</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
 
                                 </td>
                                 <td>
-                                    <mat-form-field [style.width.px]=50 class="example-full-width ">
-                                        <input matInput placeholder=" " value=" " type="text ">
+                                    <mat-form-field [style.width.px]=50 class="example-full-width " formArrayName="restriccion">
+                                        <input matInput [formControlName]="1" placeholder="" value="" type="number">
                                     </mat-form-field>
                                 </td>
                             </tr>

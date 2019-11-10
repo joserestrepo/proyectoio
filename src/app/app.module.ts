@@ -8,6 +8,7 @@ import {MatRadioModule } from '@angular/material/radio';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -20,6 +21,7 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { SimulacionComponent } from './components/simulacion/simulacion.component';
 import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pipe';
+import { SinSolucionComponent } from './components/sin-solucion/sin-solucion.component';
 
 
 
@@ -30,7 +32,8 @@ import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pip
     FooterComponent,
     HomeComponent,
     SimulacionComponent,
-    PrimercaractermayusculaPipe
+    PrimercaractermayusculaPipe,
+    SinSolucionComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pip
     MatRadioModule,
     MatInputModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module
   ],
   providers: [],
   bootstrap: [AppComponent]

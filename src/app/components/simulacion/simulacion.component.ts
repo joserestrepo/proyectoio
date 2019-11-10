@@ -1,9 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, SimpleChanges   } from '@angular/core';
 import { Datos } from '../../clases/datos';
 
+import Swal from 'sweetalert2'
+
+
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import { SimplexService } from '../../services/simplex.service';
+
+import { Router }  from '@angular/router'
 
 
 
@@ -74,22 +79,25 @@ export class SimulacionComponent implements OnInit {
   private control_fo:number;
   private control_restricciones:number;
 
-  constructor(private changeDetector: ChangeDetectorRef, private simplex_service:SimplexService) {
+  constructor(private changeDetector: ChangeDetectorRef, 
+    private simplex_service:SimplexService,
+    private router:Router) {
+
     this.formulario.tipo_optimizacion = "max";
     this.formulario.vd = null;
    }
 
   ngOnInit() {
      this.forma = new FormGroup({
-      'numero_variables_decision' : new FormControl(''),
-      'tipo_optimizacion': new FormControl('max'),
+      'numero_variables_decision' : new FormControl('',Validators.required),
+      'tipo_optimizacion': new FormControl('max',Validators.required),
       'funcion_objetivo': new FormArray([]),
-      'numero_restricciones': new FormControl(''),
+      'numero_restricciones': new FormControl('',Validators.required),
       'restricciones': new FormArray([
-        new FormControl('')
+        new FormControl('',Validators.required)
       ])
     })
-
+   
     this.forma.controls.numero_variables_decision.valueChanges.subscribe( data =>{
       console.log("cambio");
       if( data != null  &&  this.control_fo != data){
@@ -108,6 +116,7 @@ export class SimulacionComponent implements OnInit {
 
   }
 
+
   ngAfterViewChecked(): void {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
@@ -122,7 +131,7 @@ export class SimulacionComponent implements OnInit {
       this.forma.controls.numero_restricciones.reset();
       this.control_restricciones = null;
       for(var i=0; i<value; i++){
-        (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl(''));
+        (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl('',Validators.required));
       }
     
   }
@@ -132,10 +141,10 @@ export class SimulacionComponent implements OnInit {
     (<FormArray>this.forma.controls.restricciones).clear();
     for(var i=0; i<value;i++){
       let lista_auxiliar = new FormArray([]);
-      (<FormArray>lista_auxiliar).push(new FormControl("<="));
-      (<FormArray>lista_auxiliar).push(new FormControl(0));
+      (<FormArray>lista_auxiliar).push(new FormControl("<=",Validators.required));
+      (<FormArray>lista_auxiliar).push(new FormControl('',Validators.required));
       for(var j=0; j<this.forma.controls.numero_variables_decision.value;j++){
-        (<FormArray>lista_auxiliar).push(new FormControl(0));
+        (<FormArray>lista_auxiliar).push(new FormControl('',Validators.required));
       }
       (<FormArray>this.forma.controls.restricciones).push(new FormGroup({ 'restriccion': lista_auxiliar }));
     }
@@ -143,9 +152,20 @@ export class SimulacionComponent implements OnInit {
 
   evaluarDatos(){
     console.log(this.forma)
-    this.simplex_service.solucionarProblema().subscribe(data =>{
-      console.log(data)
-    })
+    if( this.forma.valid ){
+      this.simplex_service.solucionarProblema(this.forma.value).subscribe(data =>{
+        console.log(data)
+        this.router.navigate(['/sinSolucion'])
+      });
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El formulario esta incompleto, verifica y vuelve a intentarlo!',
+        footer: '<a href>Why do I have this issue?</a>'
+      })
+    }
+    
   }
 
 
