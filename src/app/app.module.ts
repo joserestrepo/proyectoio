@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SimulacionComponent } from './components/simulacion/simulacion.component';
 import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pipe';
 import { SinSolucionComponent } from './components/sin-solucion/sin-solucion.component';
+import { SolucionComponent } from './components/solucion/solucion.component';
 
 
 
@@ -33,7 +34,8 @@ import { SinSolucionComponent } from './components/sin-solucion/sin-solucion.com
     HomeComponent,
     SimulacionComponent,
     PrimercaractermayusculaPipe,
-    SinSolucionComponent
+    SinSolucionComponent,
+    SolucionComponent
   ],
   imports: [
     BrowserModule,

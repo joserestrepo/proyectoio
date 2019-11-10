@@ -15,10 +15,12 @@ import { Api } from '../clases/api.config';
 export class SimplexService {
 
   private api:Api;
-  private resultados = {
+
+  public resultados = {
     'lista_interacciones': [],
     'estado' : true,
   }
+
   constructor( private httpCliente:HttpClient ) { 
     this.api = new Api();
   }
@@ -36,6 +38,6 @@ export class SimplexService {
         this.resultados['estado'] = data['estado'];
         return this.resultados;
      }));
-     
+
   }
 }

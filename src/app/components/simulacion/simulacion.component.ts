@@ -155,7 +155,12 @@ export class SimulacionComponent implements OnInit {
     if( this.forma.valid ){
       this.simplex_service.solucionarProblema(this.forma.value).subscribe(data =>{
         console.log(data)
-        this.router.navigate(['/sinSolucion'])
+        if(data['estado']){
+          this.router.navigate(['/solucion'])
+        }else{
+          this.router.navigate(['/sinSolucion'])
+        }
+        
       });
     }else{
       Swal.fire({
