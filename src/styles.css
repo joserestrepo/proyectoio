@@ -2,6 +2,7 @@
 
 @import '~katex/dist/katex.css';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~animate.css/animate.min';
 html {
     width: 100%;
     height: 100%;
