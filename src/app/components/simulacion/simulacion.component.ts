@@ -79,7 +79,7 @@ export class SimulacionComponent implements OnInit {
   private control_fo:number;
   private control_restricciones:number;
 
-  constructor(private changeDetector: ChangeDetectorRef, 
+  constructor(private changeDetector: ChangeDetectorRef,
     private simplex_service:SimplexService,
     private router:Router) {
 
@@ -97,9 +97,9 @@ export class SimulacionComponent implements OnInit {
         new FormControl('',Validators.required)
       ])
     })
-   
+
     this.forma.controls.numero_variables_decision.valueChanges.subscribe( data =>{
-      console.log("cambio");
+
       if( data != null  &&  this.control_fo != data){
         this.llenarFuncionObjetivo(data);
         this.control_fo = data;
@@ -107,7 +107,7 @@ export class SimulacionComponent implements OnInit {
     });
 
     this.forma.controls.numero_restricciones.valueChanges.subscribe( data =>{
-      console.log("cambio");
+
       if( data != null  &&  this.control_restricciones != data){
         this.llenarRestricciones(data);
         this.control_restricciones = data;
@@ -117,15 +117,6 @@ export class SimulacionComponent implements OnInit {
   }
 
 
-  ngAfterViewChecked(): void {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
-    
-    this.changeDetector.detectChanges();
-  }
-
-
-
   llenarFuncionObjetivo(value){
       (<FormArray>this.forma.controls.funcion_objetivo).clear();
       this.forma.controls.numero_restricciones.reset();
@@ -133,7 +124,7 @@ export class SimulacionComponent implements OnInit {
       for(var i=0; i<value; i++){
         (<FormArray>this.forma.controls.funcion_objetivo).push( new FormControl('',Validators.required));
       }
-    
+
   }
 
 
@@ -160,7 +151,7 @@ export class SimulacionComponent implements OnInit {
         }else{
           this.router.navigate(['/sinSolucion'])
         }
-        
+
       });
     }else{
       Swal.fire({
@@ -170,7 +161,7 @@ export class SimulacionComponent implements OnInit {
         footer: '<a href>Why do I have this issue?</a>'
       })
     }
-    
+
   }
 
 
