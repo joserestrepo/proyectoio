@@ -99,7 +99,6 @@ export class SimulacionComponent implements OnInit {
     })
    
     this.forma.controls.numero_variables_decision.valueChanges.subscribe( data =>{
-      console.log("cambio");
       if( data != null  &&  this.control_fo != data){
         this.llenarFuncionObjetivo(data);
         this.control_fo = data;
@@ -107,7 +106,6 @@ export class SimulacionComponent implements OnInit {
     });
 
     this.forma.controls.numero_restricciones.valueChanges.subscribe( data =>{
-      console.log("cambio");
       if( data != null  &&  this.control_restricciones != data){
         this.llenarRestricciones(data);
         this.control_restricciones = data;
