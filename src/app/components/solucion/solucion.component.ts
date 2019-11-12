@@ -8,9 +8,10 @@ import { SimplexService } from '../../services/simplex.service';
   styleUrls: ['./solucion.component.css']
 })
 export class SolucionComponent implements OnInit {
-
+  listas: any []= [];
   constructor(private simplexService:SimplexService) { 
-    console.log(this.simplexService.resultados)
+    console.log(this.simplexService.resultados);
+    this.listas = this.simplexService.resultados.lista_interacciones;
   }
 
   ngOnInit() {
