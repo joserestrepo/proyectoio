@@ -5,9 +5,9 @@
             <thead>
                 <div class="container text-center">
                     <tr>
-                        <th scope="col" class="bg-warning"></th>
+                        <th scope="col" class="colorN"></th>
                         <th scope="col">Cj</th>
-                        <th scope="col" class="bg-warning"></th>
+                        <th scope="col" class="colorN"></th>
                         <th scope="col" *ngFor="let Cj of lista.cj">{{Cj}}</th>
                     </tr>
                     <tr>
@@ -23,14 +23,14 @@
                     </tr>
 
                     <tr>
-                        <th class="bg-warning"></th>
+                        <th class="colorN"></th>
                         <th>Zj</th>
                         <td *ngFor="let zj of lista.zj">{{zj | number:'1.0-2'}}</td>
                     </tr>
                     <tr>
-                        <th class="bg-warning"></th>
+                        <th class="colorN"></th>
                         <th>Cj-Zj</th>
-                        <th scope="col" class="bg-warning"></th>
+                        <th scope="col" class="colorN"></th>
                         <td *ngFor="let cjzj of lista.cj_zj">{{cjzj | number: '1.0-2'}}</td>
                     </tr>
                 </div>
