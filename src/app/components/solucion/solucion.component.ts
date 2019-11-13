@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { SimplexService } from '../../services/simplex.service';
 
 @Component({
@@ -8,12 +7,13 @@ import { SimplexService } from '../../services/simplex.service';
   styleUrls: ['./solucion.component.css']
 })
 export class SolucionComponent implements OnInit {
-
-  constructor(private simplexService:SimplexService) { 
-    console.log(this.simplexService.resultados)
+  listas: any [] = [];
+  constructor(private simplexService: SimplexService) {
+    //console.log(this.simplexService.resultados);
+    this.listas = ['1', '12' ];
+    console.log(this.listas);
   }
 
   ngOnInit() {
   }
-
 }
