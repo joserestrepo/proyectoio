@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { SimplexService } from '../../services/simplex.service';
 
 @Component({
@@ -8,13 +7,21 @@ import { SimplexService } from '../../services/simplex.service';
   styleUrls: ['./solucion.component.css']
 })
 export class SolucionComponent implements OnInit {
-  listas: any []= [];
-  constructor(private simplexService:SimplexService) { 
-    console.log(this.simplexService.resultados);
-    this.listas = this.simplexService.resultados.lista_interacciones;
+
+  public listas: any [];
+  public solucion;
+  public descripcion;
+  constructor(private simplexService: SimplexService ) { 
+    
+    //this.listas = this.simplexService.resultados.lista_interacciones;
   }
 
   ngOnInit() {
+    this.simplexService.solucionarProblema("").subscribe(data=>{
+      console.log(data)
+      this.listas = data.lista_interacciones
+      this.solucion = data.solucion
+    console.log(this.listas)
+    });
   }
-
 }
