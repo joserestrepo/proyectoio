@@ -1,10 +1,8 @@
 <div class="div-completo-fondo-blanco ">
     <br>
-    <div class="container" *ngFor="let lista of listas; let ntabla=index">
-            <p>
-                    {{lista.descripcion}}
-            </p>
-        <table class="table text-center table-bordered mt-5" >
+    <div class="container text-center" *ngFor="let lista of listas; let ntabla=index">
+        <ng-katex-paragraph paragraph="{{lista.descripcion}}"></ng-katex-paragraph>
+        <table class="table text-center table-bordered mt-5">
             <tbody>
                 <tr>
                     <th scope="col" class="colorn">
@@ -66,6 +64,10 @@
             </tbody>
         </table>
     </div>
-    
+    <div class="container text-center">
+        <ng-katex-paragraph paragraph="{{solucion}}"></ng-katex-paragraph>
+        <hr>
+    </div>
+
     <br>
 </div>

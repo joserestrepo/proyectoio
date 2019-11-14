@@ -34,7 +34,7 @@ export class SimplexService {
     header.append('Content-Type', 'application/json');
     header.append('No-Auth', 'True');
 
-    return this.httpCliente.get(this.api.urlApi+"simplex",{headers:header}).pipe(map(data => {
+    return this.httpCliente.post(this.api.urlApi+"simplex",datos,{headers:header}).pipe(map(data => {
         this.resultados['lista_interacciones'] = data['lista_interacciones'];
         this.resultados['estado'] = data['estado'];
         this.resultados['solucion'] = data['solucion'];

@@ -13,15 +13,11 @@ export class SolucionComponent implements OnInit {
   public descripcion;
   constructor(private simplexService: SimplexService ) { 
     
-    //this.listas = this.simplexService.resultados.lista_interacciones;
+    this.listas = this.simplexService.resultados.lista_interacciones;
+    this.solucion = this.simplexService.resultados.solucion;
   }
 
   ngOnInit() {
-    this.simplexService.solucionarProblema("").subscribe(data=>{
-      console.log(data)
-      this.listas = data.lista_interacciones
-      this.solucion = data.solucion
-    console.log(this.listas)
-    });
+  
   }
 }
