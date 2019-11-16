@@ -97,10 +97,10 @@ export class SimulacionComponent implements OnInit {
         new FormControl('',Validators.required)
       ])
     })
-
     this.forma.controls.numero_variables_decision.valueChanges.subscribe( data =>{
 
       if( data != null  &&  this.control_fo != data){
+
         this.llenarFuncionObjetivo(data);
         this.control_fo = data;
       }

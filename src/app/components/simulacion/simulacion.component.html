@@ -11,7 +11,7 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div @enterDifuminado *ngIf="forma.controls.numero_variables_decision.value > 0">
+            <div @enterDifuminado *ngIf="forma.value.numero_variables_decision.value > 0">
                 <div class="form-group row">
                     <div class="col">
                         <label for="optimizacion" class="mr-2 mb-2">Seleccione el tipo de optimizacion: </label>
@@ -27,14 +27,14 @@
                         <table>
                             <tr>
                                 <td>
-                                    <div [@maxMin]="forma.controls.tipo_optimizacion.value">
-                                        <ng-katex-paragraph paragraph="$ {{forma.controls.tipo_optimizacion.value | primercaractermayuscula}}Z: $"></ng-katex-paragraph>
+                                    <div [@maxMin]="forma.value.tipo_optimizacion.value">
+                                        <ng-katex-paragraph paragraph="$ {{forma.value.tipo_optimizacion.value | primercaractermayuscula}}Z: $"></ng-katex-paragraph>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div formArrayName="funcion_objetivo" class="d-inline-block align-self-end" *ngFor="let item of forma.controls.funcion_objetivo.controls; let i = index">
+                    <div formArrayName="funcion_objetivo" class="d-inline-block align-self-end" *ngFor="let item of forma.value.funcion_objetivo.controls; let i = index">
                         <table>
                             <tr>
                                 <td>
@@ -45,7 +45,7 @@
                                 <td>
                                     <ng-katex-paragraph paragraph="$x_{{i+1}}$"></ng-katex-paragraph>
                                 </td>
-                                <td *ngIf="(i+1) < forma.controls.numero_variables_decision.value">
+                                <td *ngIf="(i+1) < forma.value.numero_variables_decision.value">
                                     <ng-katex-paragraph paragraph="$+$"></ng-katex-paragraph>
                                 </td>
                             </tr>
@@ -62,8 +62,8 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div @enterDifuminado *ngIf="forma.controls.numero_variables_decision.value > 0 && forma.controls.numero_restricciones.value > 0">
-                <div class="form-group text-center" *ngFor="let restriccion of forma.controls.restricciones.controls; let i= index ">
+            <div @enterDifuminado *ngIf="forma.value.numero_variables_decision.value > 0 && forma.value.numero_restricciones.value > 0">
+                <div class="form-group text-center" *ngFor="let restriccion of forma.value.restricciones.controls; let i= index ">
                     <div formArrayName="restricciones" class="align-self-center">
                         <table class="d-inline-block">
                             <tr>
@@ -72,7 +72,7 @@
                                 </div>
                             </tr>
                         </table>
-                        <div [formGroupName]="i" class="d-inline-block align-self-end" *ngFor="let item of forma.controls.funcion_objetivo.controls; let j = index">
+                        <div [formGroupName]="i" class="d-inline-block align-self-end" *ngFor="let item of forma.value.funcion_objetivo.controls; let j = index">
                             <table>
                                 <tr>
                                     <td formArrayName="restriccion">
@@ -83,7 +83,7 @@
                                     <td>
                                         <ng-katex-paragraph paragraph="$x_{{j+1}}$"></ng-katex-paragraph>
                                     </td>
-                                    <td *ngIf="(j+1) < forma.controls.numero_variables_decision.value">
+                                    <td *ngIf="(j+1) < forma.value.numero_variables_decision.value">
                                         <ng-katex-paragraph paragraph="$+$"></ng-katex-paragraph>
                                     </td>
                                 </tr>
@@ -117,11 +117,11 @@
                 <div formArrayName="funcion_objetivo" class="d-inline-block align-self-end">
                     <table>
                         <tr>
-                            <div class="d-inline-block align-self-end" *ngFor="let item of forma.controls.funcion_objetivo.controls; let i = index">
+                            <div class="d-inline-block align-self-end" *ngFor="let item of forma.value.funcion_objetivo.controls; let i = index">
                                 <td>
                                     <ng-katex-paragraph paragraph="$x_{{i+1}}$"></ng-katex-paragraph>
                                 </td>
-                                <td *ngIf="(i+1) < forma.controls.numero_variables_decision.value">
+                                <td *ngIf="(i+1) < forma.value.numero_variables_decision.value">
                                     <ng-katex-paragraph paragraph="$,$"></ng-katex-paragraph>
                                 </td>
                             </div>
