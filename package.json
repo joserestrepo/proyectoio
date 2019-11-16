@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "lite": "lite-server",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
@@ -61,8 +61,8 @@
     "lite-server": "^2.4.0"
   },
   "engines": {
-    "node": "10.14.2",
-      "npm": "6.4.1"
+    "node": "~10.14.2",
+      "npm": "~6.4.1"
   }
 }
 
