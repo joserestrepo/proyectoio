@@ -75,7 +75,7 @@ import {
 export class SimulacionComponent implements OnInit {
 
   private formulario:Datos = new Datos;
-  private forma:FormGroup;
+  public forma:FormGroup;
   private control_fo:number;
   private control_restricciones:number;
 
