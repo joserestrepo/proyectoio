@@ -1,7 +1,42 @@
 <div class="div-completo-fondo-blanco ">
     <br>
-    <div class="container bg-white text-center border-radius border">
-        aas
+    <div class="container border-radius" style="margin-right: 180px; margin-left: 100px;">
+        <table class="table table-bordered" *ngFor="let lista of listas">
+            <thead>
+                <div class="container text-center">
+                    <tr>
+                        <th scope="col" class="bg-warning"></th>
+                        <th scope="col">Cj</th>
+                        <th scope="col" class="bg-warning"></th>
+                        <th scope="col" *ngFor="let Cj of lista.cj">{{Cj}}</th>
+                    </tr>
+                    <tr>
+                        <th>Cb</th>
+                        <th>Vsol</th>
+                        <td>Sol</td>
+                        <td *ngFor="let listan of lista.variables">{{listan}}</td>
+                    </tr>
+                    <tr *ngFor="let num of lista.cb; let indice=index">
+                        <td>{{num}}</td>
+                        <td>{{lista.variables_solucion[indice]}}</td>
+                        <td *ngFor="let op of lista.operaciones[indice]; let opcion=index">{{op}}</td>
+                    </tr>
+
+                    <tr>
+                        <th class="bg-warning"></th>
+                        <th>Zj</th>
+                        <td *ngFor="let zj of lista.zj">{{zj | number:'1.0-2'}}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-warning"></th>
+                        <th>Cj-Zj</th>
+                        <th scope="col" class="bg-warning"></th>
+                        <td *ngFor="let cjzj of lista.cj_zj">{{cjzj | number: '1.0-2'}}</td>
+                    </tr>
+                </div>
+            </thead>
+
+        </table>
     </div>
     <br>
 </div>

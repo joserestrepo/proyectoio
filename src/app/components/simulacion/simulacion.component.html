@@ -90,12 +90,12 @@
                             </table>
                         </div>
                         <table [formGroupName]="i" class="d-inline-block ml-2">
-                            <tr>
+                            <tr formArrayName="restriccion">
                                 <td>
-                                    <div class="mr-2" formArrayName="restriccion">
+                                    <div class="mr-2">
                                         <mat-form-field [style.width.px]=50>
                                             <mat-label>Signo</mat-label>
-                                            <mat-select [(value)]="selected" [formControlName]="0">
+                                            <mat-select [formControlName]="0">
                                                 <mat-option>None</mat-option>
                                                 <mat-option value="=">=</mat-option>
                                                 <mat-option value=">=">≥</mat-option>
@@ -106,7 +106,7 @@
 
                                 </td>
                                 <td>
-                                    <mat-form-field [style.width.px]=50 class="example-full-width " formArrayName="restriccion">
+                                    <mat-form-field [style.width.px]=50>
                                         <input matInput [formControlName]="1" placeholder="" value="" type="number">
                                     </mat-form-field>
                                 </td>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <hr>
-            <button type="submit " class="btn btn-outline-success mb-4 ">=</button>
+            <button type="submit " class="btn btn-outline-success mb-4">=</button>
         </form>
     </div>
     <br>
