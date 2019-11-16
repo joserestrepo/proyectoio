@@ -19,6 +19,7 @@ export class SimplexService {
   public resultados = {
     'lista_interacciones': [],
     'estado' : true,
+    'solucion':""
   }
 
   constructor( private httpCliente:HttpClient ) { 
@@ -36,6 +37,7 @@ export class SimplexService {
     return this.httpCliente.post(this.api.urlApi+"simplex",datos,{headers:header}).pipe(map(data => {
         this.resultados['lista_interacciones'] = data['lista_interacciones'];
         this.resultados['estado'] = data['estado'];
+        this.resultados['solucion'] = data['solucion'];
         return this.resultados;
      }));
 

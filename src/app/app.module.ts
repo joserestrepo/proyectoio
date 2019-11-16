@@ -23,6 +23,8 @@ import { SimulacionComponent } from './components/simulacion/simulacion.componen
 import { PrimercaractermayusculaPipe } from './pipes/primercaractermayuscula.pipe';
 import { SinSolucionComponent } from './components/sin-solucion/sin-solucion.component';
 import { SolucionComponent } from './components/solucion/solucion.component';
+import { InstruccionesComponent } from './components/instrucciones/instrucciones.component';
+import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
 
 
 
@@ -35,7 +37,9 @@ import { SolucionComponent } from './components/solucion/solucion.component';
     SimulacionComponent,
     PrimercaractermayusculaPipe,
     SinSolucionComponent,
-    SolucionComponent
+    SolucionComponent,
+    InstruccionesComponent,
+    AcercaDeComponent
   ],
   imports: [
     BrowserModule,

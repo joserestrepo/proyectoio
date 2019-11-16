@@ -1,42 +1,73 @@
 <div class="div-completo-fondo-blanco ">
     <br>
-    <div class="container border-radius" style="margin-right: 180px; margin-left: 100px;">
-        <table class="table table-bordered" *ngFor="let lista of listas">
-            <thead>
-                <div class="container text-center">
-                    <tr>
-                        <th scope="col" class="bg-warning"></th>
-                        <th scope="col">Cj</th>
-                        <th scope="col" class="bg-warning"></th>
-                        <th scope="col" *ngFor="let Cj of lista.cj">{{Cj}}</th>
-                    </tr>
-                    <tr>
-                        <th>Cb</th>
-                        <th>Vsol</th>
-                        <td>Sol</td>
-                        <td *ngFor="let listan of lista.variables">{{listan}}</td>
-                    </tr>
-                    <tr *ngFor="let num of lista.cb; let indice=index">
-                        <td>{{num}}</td>
-                        <td>{{lista.variables_solucion[indice]}}</td>
-                        <td *ngFor="let op of lista.operaciones[indice]; let opcion=index">{{op}}</td>
-                    </tr>
+    <div class="container text-center" *ngFor="let lista of listas; let ntabla=index">
+        <ng-katex-paragraph paragraph="{{lista.descripcion}}"></ng-katex-paragraph>
+        <table class="table text-center table-bordered mt-5">
+            <tbody>
+                <tr>
+                    <th scope="col" class="colorn">
+                        <ng-katex-paragraph paragraph="$Tabla{{ntabla}}$"></ng-katex-paragraph>
+                    </th>
+                    <th scope="col">
+                        <ng-katex-paragraph paragraph="$CJ$"></ng-katex-paragraph>
+                    </th>
+                    <th scope="col"></th>
+                    <th scope="col" *ngFor="let Cj of lista.cj">
+                        <ng-katex-paragraph paragraph="${{Cj}}$"></ng-katex-paragraph>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <ng-katex-paragraph paragraph="$Cb$"></ng-katex-paragraph>
+                    </th>
+                    <th>
+                        <ng-katex-paragraph paragraph="$Vsol$"></ng-katex-paragraph>
+                    </th>
+                    <td>
+                        <ng-katex-paragraph paragraph="$Sol$"></ng-katex-paragraph>
+                    </td>
+                    <td *ngFor="let listan of lista.variables">
+                        <ng-katex-paragraph paragraph="${{listan}}$"></ng-katex-paragraph>
+                    </td>
+                </tr>
+                <tr *ngFor="let num of lista.cb; let indice=index">
+                    <td>
+                        <ng-katex-paragraph paragraph="${{num}}$"></ng-katex-paragraph>
+                    </td>
+                    <td>
+                        <ng-katex-paragraph paragraph="${{lista.variables_solucion[indice]}}$"></ng-katex-paragraph>
+                    </td>
+                    <td *ngFor="let op of lista.operaciones[indice]; let opcion=index">
+                        <ng-katex-paragraph paragraph="${{op}}$"></ng-katex-paragraph>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <th class="bg-warning"></th>
-                        <th>Zj</th>
-                        <td *ngFor="let zj of lista.zj">{{zj | number:'1.0-2'}}</td>
-                    </tr>
-                    <tr>
-                        <th class="bg-warning"></th>
-                        <th>Cj-Zj</th>
-                        <th scope="col" class="bg-warning"></th>
-                        <td *ngFor="let cjzj of lista.cj_zj">{{cjzj | number: '1.0-2'}}</td>
-                    </tr>
-                </div>
-            </thead>
-
+                <tr>
+                    <th></th>
+                    <th>
+                        <ng-katex-paragraph paragraph="$Zj$"></ng-katex-paragraph>
+                    </th>
+                    <td *ngFor="let zj of lista.zj">
+                        <ng-katex-paragraph paragraph="${{zj | number:'1.0-2'}}$"></ng-katex-paragraph>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <ng-katex-paragraph paragraph="$Cj-Zj$"></ng-katex-paragraph>
+                    </th>
+                    <th scope="col"></th>
+                    <td *ngFor="let cjzj of lista.cj_zj">
+                        <ng-katex-paragraph paragraph="${{cjzj | number: '1.0-2'}}$"></ng-katex-paragraph>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
+    <div class="container text-center">
+        <ng-katex-paragraph paragraph="{{solucion}}"></ng-katex-paragraph>
+        <hr>
+    </div>
+
     <br>
 </div>
